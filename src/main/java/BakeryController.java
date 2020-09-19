@@ -25,15 +25,21 @@ public class BakeryController {
         finally{recipeID++;}
     }
 
-    Ingredient registerIngredient(String name, int storedGrams){
-        Ingredient ingredient = new Ingredient(getIngredientID(), name, storedGrams);
-        allIngredients.add(ingredient);
-        return ingredient;
+    void registerIngredient(String name, int storedGrams)
+    {
+        Ingredient ingredient = new Ingredient(getIngredientID(), name);
+        if(!ingredientStorage.containsKey(name))
+        {
+            ingredientStorage.put(ingredient, storedGrams);
+        }
+        else
+        {
+            stockUpIngredient(ingredient.getId(), storedGrams);
+        }
     }
 
     void registerRecipe(String name, ProductType productType, Map ingredients){
-        Date date = new Date();
-        allRecipes.add(new Recipe(getRecipeID(), name, date, productType, ingredients));
+        allRecipes.add(new Recipe(getRecipeID(), name, new Date(), productType, ingredients));
     }
 
     int stockUpIngredient(int id, int quantityInGrams){

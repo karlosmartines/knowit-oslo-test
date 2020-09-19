@@ -1,12 +1,10 @@
 public class Ingredient {
     int id;
     String name;
-    int storedGrams;
 
-    public Ingredient(int id, String name, int storedGrams) {
+    public Ingredient(int id, String name) {
         this.id = id;
         this.name = name;
-        this.storedGrams = storedGrams;
     }
 
     public int getId() {
@@ -15,9 +13,5 @@ public class Ingredient {
 
     public String getName() {
         return name;
-    }
-
-    public int getStoredGrams() {
-        return storedGrams;
     }
 }

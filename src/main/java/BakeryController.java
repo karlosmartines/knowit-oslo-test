@@ -1,14 +1,15 @@
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.logging.ErrorManager;
 
 public class BakeryController {
-    ArrayList<Ingredient> allIngredients = new ArrayList<>();
-    ArrayList<Recipe> allRecipes = new ArrayList<>();
+    Set<Recipe> recipes = new HashSet();
     Map<Ingredient, Integer> ingredientStorage = new HashMap();
     int ingredientID = 0;
     int recipeID = 0;
@@ -32,25 +33,20 @@ public class BakeryController {
         {
             ingredientStorage.put(ingredient, storedGrams);
         }
-        else
-        {
-            stockUpIngredient(ingredient.getId(), storedGrams);
-        }
+        //else
+        //{
+        //    stockUpIngredient(ingredient.getId(), storedGrams);
+        //}
     }
 
-    void registerRecipe(String name, ProductType productType, Map ingredients){
-        allRecipes.add(new Recipe(getRecipeID(), name, new Date(), productType, ingredients));
+    void registerRecipe(String name, ProductType productType, Map ingredients)
+    {
+        recipes.add(new Recipe(getRecipeID(), name, new Date(), productType, ingredients));
     }
 
-    int stockUpIngredient(int id, int quantityInGrams){
-        Ingredient ingredient;
-        for(Ingredient i : allIngredients){
-            if(i.getId() == id){
-                ingredient = i;
-                ingredientStorage.put(ingredient, ingredientStorage.get(ingredient) + quantityInGrams);
-                return ingredientStorage.get(ingredient);
-            }
-        }
-        return -1;
+    void stockUpIngredient(int id, int quantityInGrams)
+    {
+
+
     }
 }

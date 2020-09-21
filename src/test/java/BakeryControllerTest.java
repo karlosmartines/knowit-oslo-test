@@ -9,6 +9,7 @@ import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
 
 import static junit.framework.TestCase.assertNotNull;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -93,6 +94,21 @@ public class BakeryControllerTest {
     }
 
     @Test
-    public void stockUpIngredient() {
+    public void stockUpIngredient()
+    {
+        Collection<Integer> storedQuantity = ingredientStorage.values();
+        int stockUpQuantity = 100;
+        storedQuantity.forEach(q -> q += stockUpQuantity);
+
+        ingredientStorage.keySet()
+            .forEach(i -> bakeryController.stockUpIngredient(i.getId(), stockUpQuantity));
+
+        assertThat(ingredientStorage.values(), equalTo(storedQuantity));
+    }
+
+    @Test
+    public void getAllRecipesOfType()
+    {
+
     }
 }
